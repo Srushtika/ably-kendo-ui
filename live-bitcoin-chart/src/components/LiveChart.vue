@@ -15,6 +15,15 @@
 
 <script>
 export default {};
+var ably = new Ably.Realtime({
+  authUrl: "https://ably-kendo-ui.glitch.me/auth"
+});
+var jpyPriceChannel = ably.channels.get(
+  "[product:ably-bitflyer/bitcoin]bitcoin:jpy"
+);
+jpyPriceChannel.subscribe(msg => {
+  console.log(`${msg.data.side} at ${msg.data.price}`);
+});
 </script>
 
 <style scoped>
